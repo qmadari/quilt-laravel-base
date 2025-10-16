@@ -4,7 +4,7 @@ namespace QuintenMadari\QuiltLaravelBase;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
-use QuintenMadari\QuiltLaravelBase\Commands\EntrypointHelper;
+use QuintenMadari\QuiltLaravelBase\Commands\EntrypointSetup;
 
 class QuiltLaravelBaseServiceProvider extends ServiceProvider
 {
