@@ -53,3 +53,5 @@ MIT License - see the LICENSE file for details.
 - qualtrics (traits)
 - prolific
 
+## Versioning
+https://getcomposer.org/doc/articles/versions.md
