@@ -1,0 +1,209 @@
+ /* CSS Custom Properties */
+ 
+ /* Theme Variables */
+:root {
+    --transition-speed: 0.3s;
+    --transition-ease: ease;
+}
+
+/* Light Theme */
+body[data-theme="light"] {
+    font-family: 'Figtree', sans-serif;
+    background-color: #f8fafc;
+    margin: 0;
+    padding: 0;
+    color: #2d3748;
+    min-height: 100vh;
+    position: relative;
+    transition: background-color var(--transition-speed) var(--transition-ease);
+}
+
+/* Dark Theme */
+body[data-theme="dark"] {
+    font-family: 'Figtree', sans-serif;
+    background-color: rgb(10, 13, 17);
+    margin: 0;
+    padding: 0;
+    color: #f3f4f6;
+    min-height: 100vh;
+    position: relative;
+    transition: background-color var(--transition-speed) var(--transition-ease);
+}
+
+/* Title */
+.title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+/* body[data-theme="light"] .title { color: #2d3748; } */
+body[data-theme="light"] .title { color: #45536b; }
+body[data-theme="dark"] .title { color: #718096; }
+
+/* Subtitle */
+.subtitle {
+    margin-bottom: 2rem;
+    font-size: 1.25rem;
+}
+body[data-theme="light"] .subtitle { color: #4a5568; }
+body[data-theme="dark"] .subtitle { color: #cbd5e0; }
+
+/* Description */
+.description {
+    line-height: 1.75;
+    margin-bottom: 2rem;
+}
+body[data-theme="light"] .description { color: #6b7280; }
+body[data-theme="dark"] .description { color: #e2e8f0; }
+
+.contact {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: inline-block;
+}
+
+/* Contact */
+body[data-theme="light"] .contact {
+    background-color: #ffffff;
+    color: #4a5568;
+}
+body[data-theme="dark"] .contact {
+    background-color: #2d3748;
+    color: #cbd5e0;
+}
+
+.contact a {
+    text-decoration: none;
+}
+.contact a:hover {
+    text-decoration: underline;
+}
+
+/* Theme switcher */
+body[data-theme="light"] .contact a { color: #60a5fa; }
+body[data-theme="dark"] .contact a { color: #60a5fa; }
+
+/* Theme switcher */
+.theme-switcher {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+}
+
+.theme-toggle {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color var(--transition-speed) var(--transition-ease);
+}
+
+body[data-theme="light"] .theme-toggle {
+    background-color: #718096;
+    color: white;
+    transition: background-color var(--transition-speed) var(--transition-ease)
+}
+body[data-theme="light"] .theme-toggle:hover {
+    background-color: rgb(10, 13, 17);
+    color: white;
+    transition: background-color var(--transition-speed) var(--transition-ease)
+}
+
+body[data-theme="dark"] .theme-toggle {
+    background-color: rgb(139, 161, 187);
+    color: white;
+    transition: background-color var(--transition-speed) var(--transition-ease)
+}
+body[data-theme="dark"] .theme-toggle:hover {
+    background-color: #f3f4f6;
+    color: white;
+    transition: background-color var(--transition-speed) var(--transition-ease)
+}
+
+.container {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    min-height: 60px;
+    box-sizing: border-box;
+}
+.footer-links {
+    display: flex;
+    gap: 1rem;
+    margin-left: 1rem;
+}
+
+.footer-link {
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+}
+.version-info {
+    opacity: 0;
+    padding: 0 0.5rem;
+    transition: opacity var(--transition-speed) ease-in-out;
+    min-width: 180px;
+    white-space: normal;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    text-align: right;
+    font-size: 0.875em;
+    font-style: italic;
+    letter-spacing: 0.4px;
+}
+
+.logo {
+    width: 180px;
+    height: auto;
+    opacity: 0.8;
+    transition: opacity var(--transition-speed) ease;
+    max-width: 180px;
+    overflow: hidden;
+}
+
+.logo:hover {
+    opacity: 1;
+}
+
+.logo:hover ~ .version-info,
+.version-info:hover {
+    opacity: 0.4;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@media (max-width: 640px) {
+    .title {
+        font-size: 2rem;
+    }
+    .content {
+        padding: 2rem;
+        margin-bottom: 4rem;
+    }
+    .logo {
+        height: 30px;
+    }
+}
