@@ -1,0 +1,13 @@
+## Todo
+- middleware
+- seeders
+- schedules
+- routes
+- qualtrics (traits)
+- prolific
+
+## Versioning
+https://getcomposer.org/doc/articles/versions.md
+git tag v1.0.0
+git push --tags -u origin {branch name}
+
