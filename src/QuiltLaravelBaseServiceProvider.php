@@ -47,12 +47,18 @@ class QuiltLaravelBaseServiceProvider extends ServiceProvider
         //      __DIR__.'/Commands/EntrypointSetup.php' => app_path('Console/Commands/EntrypointSetup.php'),
         //  ], 'commands');
 
+        
+    }
+
+    public function register()
+    {
+        # https://laracasts.com/discuss/channels/general-discussion/how-does-mergeconfigfrom-work
         // replaceConfigRecursivelyFrom uses array_replace_recursive the wrong way around for mmy use case. 
         // Updating some keys manually instead.
 
         // manually updating allowed_origin_patterns key in cors: 
         $this->app['config']->set(
-            'allowed_origin_patterns',
+            'cors.allowed_origin_patterns',
             array_filter( array_map('trim', explode(',', env('API_CORS_AOP', 'https://sisyphus.labs.vu.nl, https://bigfoot.psy.vu.nl'))))
         );
             
@@ -61,11 +67,6 @@ class QuiltLaravelBaseServiceProvider extends ServiceProvider
             'logging.channels.daily.path',
             storage_path('logs/laravel-'.posix_getpwuid(posix_geteuid())['name'].'.log')
         );
-    }
-
-    public function register()
-    {
-        # https://laracasts.com/discuss/channels/general-discussion/how-does-mergeconfigfrom-work
         
         // add skip_sll key
         $this->mergeConfigFrom(

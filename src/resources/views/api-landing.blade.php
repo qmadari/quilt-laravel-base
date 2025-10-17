@@ -23,7 +23,7 @@
                 <h2 class="subtitle">Faculty of Behavioural and Movement Sciences (FGB)</h2>
                 
                 <div class="description">
-                    <p>{{ config('app.description') }}</p>
+                    <p>{{ config('quilt-base.api_description') }}</p>
                 </div>
                 <div class="contact">
                     API Documentation</br><a href="{{ config('app.url') }}/docs">View</a>
@@ -38,12 +38,12 @@
         </div>
         <div class="footer-links">
             <a href="/.well-known/security.txt" class="footer-link">Security</a>
-            <a href="{{ config('app.repo') }}" class="footer-link">Repository</a>
+            <a href="{{ config('quilt-base.repo_url') }}" class="footer-link">Repository</a>
         </div>
         <div class="version-info">
             Laravel v{{ app()->version() }} </br>
             PHP v{{ phpversion() }} </br>
-            API {{ config('app.api_version') }}
+            API {{ config('quilt-base.api_version') }}
         </div>
     </footer>
 
