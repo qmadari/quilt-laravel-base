@@ -10,7 +10,21 @@ class QuiltLaravelBaseServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-	    
+	    AboutCommand::add('Quilt Laravel Base', function () {
+            $composerPath = __DIR__ . '/../composer.json';
+            $composer = json_decode(file_get_contents($composerPath), true);
+            
+            return [
+                'Version' => InstalledVersions::getVersion('qmadari/quilt-laravel-base') ?? 'dev',
+                'Description' => $composer['description'] ?? 'N/A',
+                'Repository' => '<href='.$composer['homepage'] ?? 'N/A'.'>GitHub</>',
+                'Config Published' => file_exists(config_path('quilt-base.php')) ? '✓' : '✗',
+                'View Published' => file_exists(resource_path('views/api-landing.blade.php')) ? '✓' : '✗',
+                'CSS Published' => file_exists(public_path('css/api-landing.css')) ? '✓' : '✗',
+        
+            ];
+        });
+
 	    // Publish quilt-base config to customize 
         // - entrypoint setup command, 
         // - api landing page web route
