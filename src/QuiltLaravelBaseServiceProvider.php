@@ -58,8 +58,9 @@ class QuiltLaravelBaseServiceProvider extends ServiceProvider
 
         // manually updating allowed_origin_patterns key in cors: 
         $this->app['config']->set(
-            'cors.allowed_origin_patterns',
-            array_filter( array_map('trim', explode(',', env('API_CORS_AOP', 'https://sisyphus.labs.vu.nl, https://bigfoot.psy.vu.nl'))))
+            'cors.allowed_origins_patterns',
+            array_filter( array_map('trim', explode(',', env('API_CORS_AOP', ''))))
+            // array_filter( array_map('trim', explode(',', env('API_CORS_AOP', 'https://sisyphus.labs.vu.nl, https://bigfoot.psy.vu.nl'))))
         );
             
         // manually updating channels.daily.path key in logging: 
@@ -67,7 +68,7 @@ class QuiltLaravelBaseServiceProvider extends ServiceProvider
             'logging.channels.daily.path',
             storage_path('logs/laravel-'.posix_getpwuid(posix_geteuid())['name'].'.log')
         );
-        
+
         // add skip_sll key
         $this->mergeConfigFrom(
             __DIR__.'/config/database.php', 'database.connections.mariadb'
