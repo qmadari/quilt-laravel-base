@@ -59,7 +59,7 @@ class QuiltLaravelBaseServiceProvider extends ServiceProvider
         $this->app['config']->set(
             'allowed_origin_patterns',
             array_filter( array_map('trim', explode(',', env('API_CORS_AOP', ''))))
-        ),
+        );
             
         // manually updating channels.daily.path key in logging: 
         $this->app['config']->set(
@@ -92,5 +92,5 @@ class QuiltLaravelBaseServiceProvider extends ServiceProvider
             });
         }
     }
-    
+
 }
