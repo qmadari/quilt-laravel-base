@@ -36,6 +36,19 @@ To publish individually selected assets, pass the corresponding tags as argument
 `--tag=config`
 `--tag=commands`
 
+### Non-interactive installing (e.g. docker image)
+Note that when this repo is private, the `--no-interaction` flag will cause the process to error out straight away. In that case, don't use it and proceed through the authentication steps.
+``` bash
+composer config repositories.quilt-laravel-base vcs https://github.com/qmadari/quilt-laravel-base.git
+composer require qmadari/quilt-laravel-base --no-interaction
+#composer require qmadari/quilt-laravel-base:1.0.0 --no-interaction
+#composer require qmadari/quilt-laravel-base:dev-main --no-interaction
+#composer require qmadari/quilt-laravel-base:dev-dev --no-interaction
+```
+
+### Removing
+`composer remove qmadari/quilt-laravel-base`
+`composer clear-cache`
 
 ## License
 
