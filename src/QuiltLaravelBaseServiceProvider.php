@@ -2,6 +2,8 @@
 
 namespace QuintenMadari\QuiltLaravelBase;
 
+use Composer\InstalledVersions;
+use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use QuintenMadari\QuiltLaravelBase\Commands\EntrypointSetup;
