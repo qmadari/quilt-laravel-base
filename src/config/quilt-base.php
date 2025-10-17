@@ -13,7 +13,7 @@ return [
     // Custom commands with or without arguments
     'custom_entrypoint_commands' => [
         // command only format e.g.
-	//'cache:clear',
+	    //'cache:clear',
         // commands with arguments e.g.
         // 'db:seed' => [
         //     '--class' => 'UserIdSeeder',
