@@ -15,14 +15,16 @@ class QuiltLaravelBaseServiceProvider extends ServiceProvider
 	    AboutCommand::add('Quilt Laravel Base', function () {
             $composerPath = __DIR__ . '/../composer.json';
             $composer = json_decode(file_get_contents($composerPath), true);
+            $repo = $composer['homepage'] ?? 'N/A';
+            $description = $composer['description'] ?? 'N/A';
             
             return [
                 'Version' => InstalledVersions::getVersion('qmadari/quilt-laravel-base') ?? 'dev',
-                'Description' => $composer['description'] ?? 'N/A',
-                'Repository' => '<href='.$composer['homepage'] ?? 'N/A'.'>GitHub</>',
-                'Config Published' => file_exists(config_path('quilt-base.php')) ? '✓' : '✗',
-                'View Published' => file_exists(resource_path('views/api-landing.blade.php')) ? '✓' : '✗',
-                'CSS Published' => file_exists(public_path('css/api-landing.css')) ? '✓' : '✗',
+                'Description' => $description,
+                'Repository' => $repo,
+                'Config Published' => file_exists(config_path('quilt-base.php')) ? '<fg=green>Published</>'  : '<fg=yellow>Not Published</>',
+                'View Published' => file_exists(resource_path('views/api-landing.blade.php')) ? '<fg=green>Published</>'  : '<fg=yellow>Not Published</>',
+                'CSS Published' => file_exists(public_path('css/api-landing.css')) ? '<fg=green>Published</>'  : '<fg=yellow>Not Published</>',
         
             ];
         });
