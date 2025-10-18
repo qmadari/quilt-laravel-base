@@ -1,6 +1,6 @@
 {
     "name": "qmadari/quilt-laravel-base",
-    "description": "Base API setup package with Scribe documentation and landing page",
+    "description": "Base API setup with Scribe docs and landing page",
     "homepage": "https://github.com/qmadari/quilt-laravel-base",
     "type": "library",
     "license": "MIT",
