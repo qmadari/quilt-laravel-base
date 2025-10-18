@@ -64,14 +64,13 @@ class QuiltLaravelBaseServiceProvider extends ServiceProvider
         //  $this->publishes([
         //      __DIR__.'/Commands/EntrypointSetup.php' => app_path('Console/Commands/EntrypointSetup.php'),
         //  ], 'commands');
-
         
     }
 
     public function register()
     {
         # https://laracasts.com/discuss/channels/general-discussion/how-does-mergeconfigfrom-work
-        // replaceConfigRecursivelyFrom uses array_replace_recursive the wrong way around for mmy use case. 
+        // replaceConfigRecursivelyFrom uses array_replace_recursive the wrong way around for my use case. 
         // Updating some keys manually instead.
 
         // manually updating allowed_origin_patterns key in cors: 
@@ -87,18 +86,11 @@ class QuiltLaravelBaseServiceProvider extends ServiceProvider
             storage_path('logs/laravel-'.posix_getpwuid(posix_geteuid())['name'].'.log')
         );
 
-        // add skip_sll key
+        // add mariadb skip_sll key
         $this->mergeConfigFrom(
             __DIR__.'/config/database.php', 'database.connections.mariadb'
         );
 
-        // $this->mergeConfigFrom(
-        //     __DIR__.'/config/app.php', 'app'
-        // );
-
-    	// $this->mergeConfigFrom(
-        //     __DIR__.'/config/quilt-base.php', 'quilt-base'
-    	// );
     }
 
     protected function registerRoutes()
