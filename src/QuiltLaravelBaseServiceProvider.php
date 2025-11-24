@@ -11,6 +11,8 @@ use Illuminate\Routing\Router;
 use QuintenMadari\QuiltLaravelBase\Commands\EntrypointSetup;
 use QuintenMadari\QuiltLaravelBase\Http\Middleware\DocsValidateApiSecret;
 use QuintenMadari\QuiltLaravelBase\Http\Middleware\ValidateApiSecret;
+use QuintenMadari\QuiltLaravelBase\Http\Controllers\DocsTokenController;
+use QuintenMadari\QuiltLaravelBase\Http\Controllers\TokenController;
 
 class QuiltLaravelBaseServiceProvider extends ServiceProvider
 {
