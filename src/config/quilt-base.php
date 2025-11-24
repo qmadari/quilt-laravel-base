@@ -2,7 +2,7 @@
 
 return [
     // some descriptives
-    'repo_url' => env('APP_REPO_URL','https://bitbucket.org'),
+    'repo_url' => env('API_REPO_URL','https://bitbucket.org'),
     'api_version' => env('API_VERSION','0.0.0'),
     'api_description' => env('API_DESCRIPTION','API Landing Page'),
 
