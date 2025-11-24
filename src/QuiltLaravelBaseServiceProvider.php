@@ -6,6 +6,8 @@ use Composer\InstalledVersions;
 use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\Router;
+
 use QuintenMadari\QuiltLaravelBase\Commands\EntrypointSetup;
 use QuintenMadari\QuiltLaravelBase\Http\Middleware\DocsValidateApiSecret;
 use QuintenMadari\QuiltLaravelBase\Http\Middleware\ValidateApiSecret;
