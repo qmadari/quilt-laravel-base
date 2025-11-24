@@ -119,10 +119,10 @@ class QuiltLaravelBaseServiceProvider extends ServiceProvider
         );
             
         // manually updating channels.daily.path key in logging (verify with php artisan config:show logging): 
-        $this->app['config']->set(
-            'logging.channels.daily.path',
-            storage_path('logs/laravel-'.posix_getpwuid(posix_geteuid())['name'].'.log')
-        );
+        // $this->app['config']->set(
+        //     'logging.channels.daily.path',
+        //     storage_path('logs/laravel-'.posix_getpwuid(posix_geteuid())['name'].'.log')
+        // );
 
         // add mariadb skip_sll key (verify with php artisan config:show database)
         $this->mergeConfigFrom(

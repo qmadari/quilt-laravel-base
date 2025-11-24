@@ -87,6 +87,9 @@ Usually
 - Contact: to3.it-security.fgb@vu.nl
 - Policy: https://vu.nl/en/about-vu/more-about/security-and-operations-control-center
 
+### Logging
+sed -i -e "s|storage_path('logs/laravel.log'|storage_path('logs/laravel-'.posix_getpwuid(posix_geteuid())['name'].'.log'),|g" config/logging.php 
+
 
 ### Middleware Setup
 
