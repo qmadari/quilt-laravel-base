@@ -1,6 +1,8 @@
 <?php
 
 namespace QuintenMadari\QuiltLaravelBase\Commands;
+use QuintenMadari\QuiltLaravelBase\Seeders\FrontendTokenIssuerSeeder;
+use QuintenMadari\QuiltLaravelBase\Seeders\ApiDocsTokenIssuerSeeder;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -54,13 +56,14 @@ class EntrypointSetup extends Command
 	    if ($steps['seed-apidocstokenissuer']) {
 	        $subject = "ApiDocsTokenIssuerSeeder db:seed";
                 Log::info($subject);
-                $exitCode = $this->call('db:seed', ['--class' => 'ApiDocsTokenIssuerSeeder','--force' => true]); 
+                $exitCode = $this->call('db:seed', ['--class' => ApiDocsTokenIssuerSeeder::class,'--force' => true]); 
                 $errorLogic($exitCode, $subject);
 	    }
+        
 	    if ($steps['seed-frontendtokenissuer']) {
                 $subject = "FrontendTokenIssuerSeeder db:seed";
                 Log::info($subject);
-                $exitCode = $this->call('db:seed', ['--class' => 'FrontendTokenIssuerSeeder','--force' => true]); 
+                $exitCode = $this->call('db:seed', ['--class' => FrontendTokenIssuerSeeder::class,'--force' => true]); 
                 $errorLogic($exitCode, $subject);
 	    }
 
