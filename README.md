@@ -83,6 +83,11 @@ Preferred-Languages: nl, en
 Policy: [url to policy]
 Expires: 2028-06-03T14:28:24.000Z
 
+Usually
+- Contact: to3.it-security.fgb@vu.nl
+- Policy: https://vu.nl/en/about-vu/more-about/security-and-operations-control-center
+
+
 ### Middleware Setup
 
 After publishing, middleware will be immediately available to use. QuiltLaravelBaseServiceProvider sets this through `$router->aliasMiddleware`.
