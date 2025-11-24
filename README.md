@@ -89,7 +89,7 @@ Usually
 
 ### Logging
 sed -i -e "s|storage_path('logs/laravel.log'|storage_path('logs/laravel-'.posix_getpwuid(posix_geteuid())['name'].'.log'),|g" config/logging.php 
-
+https://stackoverflow.com/questions/64551170/laravel-the-stream-or-file-storage-laravel-log-could-not-be-opened-in-append-m
 
 ### Middleware Setup
 
