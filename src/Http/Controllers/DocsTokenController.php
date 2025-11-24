@@ -50,7 +50,7 @@ class DocsTokenController extends Controller
         $token = $user->createToken(
             'docs-session-token', //name
             ['docs-data-request-token'], //ability
-            now()->addMinutes($lifetimeMinutes)
+            now()->addMinutes((int)$lifetimeMinutes)
         )->plainTextToken;
         
         return response()->json([

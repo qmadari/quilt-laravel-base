@@ -30,7 +30,7 @@ class TokenController extends Controller
         $token = $user->createToken(
             'frontend-session-token', //name
             ['session-data-request-token'], //ability
-            now()->addMinutes($lifetimeMinutes)
+            now()->addMinutes((int)$lifetimeMinutes)
         )->plainTextToken;
         
         return response()->json([
