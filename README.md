@@ -35,6 +35,8 @@ To publish individually selected assets, pass the corresponding tags as argument
 `--tag=public`
 `--tag=config`
 `--tag=commands`
+`--tag=middleware`
+`--tag=controllers`
 
 ### Non-interactive installing (e.g. docker image)
 Note that when this repo is private, the `--no-interaction` flag will cause the process to error out straight away. In that case, don't use it and proceed through the authentication steps.
@@ -49,6 +51,44 @@ composer require qmadari/quilt-laravel-base --no-interaction
 ### Removing
 `composer remove qmadari/quilt-laravel-base`
 `composer clear-cache`
+
+
+### Token Generation Endpoint
+
+This package automatically registers a `/api/token` endpoint for generating Sanctum tokens.
+No configuration is necessary, all important variables have defaults set. If customization is desired, refer to `config/quilt-base.php`
+
+
+## Post require actions
+
+### User model
+The User model has to be updated with the Trait HasApiTokens to be able to interface with Sanctum to create tokens:
+`use HasFactory, Notifiable, HasApiTokens;`
+As first line within the User class.
+
+### Web route
+The package expects to host the API docs landing page on /. The route is registered after publishing, but web.php will still contain the default / route. You can either update this, or remove it.
+
+### Environment file
+The package registers 'cors.allowed_origins_patterns' from the cors.php config, to make the app a little more .env file configurable.
+The laravel and docker env files can provide allowed urls like so:
+`API_CORS_AOP="allowed.url.example.com, second.allowed.url.example.com"`
+
+
+### Middleware Setup
+
+After publishing, middleware will be immediately available to use. QuiltLaravelBaseServiceProvider sets this through `$router->aliasMiddleware`.
+It can still also be manually registered in `bootstrap/app.php`, but this is no longer necessary. An example::
+```php
+->withMiddleware(function (Middleware $middleware) {
+    $middleware->alias([
+        'api.secret' => \App\Http\Middleware\ValidateApiSecret::class,
+        'docs.api.secret' => \App\Http\Middleware\DocsValidateApiSecret::class,
+        'abilities' => \Laravel\Sanctum\Http\Middleware\CheckAbilities::class,
+        'ability' => \Laravel\Sanctum\Http\Middleware\CheckForAnyAbility::class,
+    ]);
+})
+```
 
 ## License
 

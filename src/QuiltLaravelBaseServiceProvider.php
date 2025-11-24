@@ -7,6 +7,8 @@ use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use QuintenMadari\QuiltLaravelBase\Commands\EntrypointSetup;
+use QuintenMadari\QuiltLaravelBase\Http\Middleware\DocsValidateApiSecret;
+use QuintenMadari\QuiltLaravelBase\Http\Middleware\ValidateApiSecret;
 
 class QuiltLaravelBaseServiceProvider extends ServiceProvider
 {
@@ -47,12 +49,40 @@ class QuiltLaravelBaseServiceProvider extends ServiceProvider
             __DIR__.'/public/css/api-landing.css' => public_path('css/api-landing.css'),
         ], 'public');
 
+        // // Publish Middleware
+        // $this->publishes([
+        //     __DIR__.'/Http/Middleware/DocsValidateApiSecret.php' => app_path('Http/Middleware/DocsValidateApiSecret.php'),
+        // ], 'middleware');
+        // $this->publishes([
+        //     __DIR__.'/Http/Middleware/ValidateApiSecret.php' => app_path('Http/Middleware/ValidateApiSecret.php'),
+        // ], 'middleware');
+
+        // // Publish Controllers
+        // $this->publishes([
+        //     __DIR__.'/Http/Controllers/DocsTokenController.php' => app_path('Http/Middleware/DocsTokenController.php'),
+        // ], 'controllers');
+        // $this->publishes([
+        //     __DIR__.'/Http/Controllers/TokenController.php' => app_path('Http/Middleware/TokenController.php'),
+        // ], 'controllers');
+
+        // // Publish seeder. // If this is published, the namespace in the published file, and usage in entrypoint should also be updated.
+        // $this->publishes([
+        //     __DIR__.'/Seeders/FrontendTokenIssuerSeeder.php' => database_path('seeders/FrontendTokenIssuerSeeder.php'),
+        // ], 'seeders');
+        
 	    // Register commands
         if ($this->app->runningInConsole()) {
             $this->commands([
                 EntrypointSetup::class,
             ]);
         }
+
+        $router = $this->app->make(Router::class); // this doesn't make a new router since it's a singleton, 
+                                                   // it resolves the original/current router from laravel's service container
+        $router->aliasMiddleware('docs.api.secret.validation', DocsValidateApiSecret::class); // so we can update it's attributes directly (registry of shared objects). 
+                                                                                              // same as updating bootstrap/app.php manually
+        $router->aliasMiddleware('api.secret.validation', ValidateApiSecret::class);
+
 
         // Register routes after boot
         $this->booted(function () {
@@ -80,13 +110,13 @@ class QuiltLaravelBaseServiceProvider extends ServiceProvider
             // array_filter( array_map('trim', explode(',', env('API_CORS_AOP', 'https://sisyphus.labs.vu.nl, https://bigfoot.psy.vu.nl'))))
         );
             
-        // manually updating channels.daily.path key in logging: 
+        // manually updating channels.daily.path key in logging (verify with php artisan config:show logging): 
         $this->app['config']->set(
             'logging.channels.daily.path',
             storage_path('logs/laravel-'.posix_getpwuid(posix_geteuid())['name'].'.log')
         );
 
-        // add mariadb skip_sll key
+        // add mariadb skip_sll key (verify with php artisan config:show database)
         $this->mergeConfigFrom(
             __DIR__.'/config/database.php', 'database.connections.mariadb'
         );
@@ -96,6 +126,7 @@ class QuiltLaravelBaseServiceProvider extends ServiceProvider
     protected function registerRoutes()
     {
         // register route if not disabled in config; needs to be run after boot due to config dependency
+        // (verify with php artisan route:list)
         if (!config('quilt-base.skip_api_landing_route_registration', false)) {
             Route::group(['middleware' => 'web'], function () {
                 Route::get('/', function () {
@@ -103,6 +134,21 @@ class QuiltLaravelBaseServiceProvider extends ServiceProvider
                 });
             });
         }
+
+        // Token + DocsToken endpoint route
+        if (!config('quilt-base.skip_token_route_registration', false)) {
+
+            Route::prefix('api')
+                ->middleware(['api', 'api.secret.validation']) 
+                ->post('/token', [TokenController::class, 'create_token']);
+            
+            Route::prefix('api')
+                ->middleware(['api', 'docs.api.secret.validation']) 
+                ->post('/docs/token', [DocsTokenController::class, 'create_docs_token']);
+    
+        }
+        
+        
     }
 
 }
