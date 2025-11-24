@@ -63,6 +63,8 @@ No configuration is necessary, all important variables have defaults set. If cus
 
 ### User model
 The User model has to be updated with the Trait HasApiTokens to be able to interface with Sanctum to create tokens:
+`use Laravel\Sanctum\HasApiTokens;`
+and
 `use HasFactory, Notifiable, HasApiTokens;`
 As first line within the User class.
 
@@ -74,6 +76,12 @@ The package registers 'cors.allowed_origins_patterns' from the cors.php config, 
 The laravel and docker env files can provide allowed urls like so:
 `API_CORS_AOP="allowed.url.example.com, second.allowed.url.example.com"`
 
+### Populate .well-known/security.txt
+In the format of 
+Contact: mailto: [security mail]
+Preferred-Languages: nl, en
+Policy: [url to policy]
+Expires: 2028-06-03T14:28:24.000Z
 
 ### Middleware Setup
 

@@ -48,10 +48,14 @@ class QuiltLaravelBaseServiceProvider extends ServiceProvider
             __DIR__.'/resources/views/api-landing.blade.php' => resource_path('views/api-landing.blade.php'),
         ], 'views');
 
-        // Publish CSS
+        // Publish CSS + Images + .well-known
         $this->publishes([
             __DIR__.'/public/css/api-landing.css' => public_path('css/api-landing.css'),
+            __DIR__.'/public/vu-logo-dark.png' => public_path('vu-logo-dark.png'),
+            __DIR__.'/public/vu-logo.png' => public_path('vu-logo.png'),
+            __DIR__.'/public/.well-known/security.txt' => public_path('.well-known/security.txt'),
         ], 'public');
+
 
         // // Publish Middleware
         // $this->publishes([
