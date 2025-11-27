@@ -91,7 +91,7 @@ class QuiltLaravelBaseServiceProvider extends ServiceProvider
                                                                                               // same as updating bootstrap/app.php manually
         $router->aliasMiddleware('api.secret.validation', ValidateApiSecret::class);
 
-        $router->aliasMiddleware('abilities', \Laravel\Sanctum\Http\Middleware\CheckAbilities::class;
+        $router->aliasMiddleware('abilities', \Laravel\Sanctum\Http\Middleware\CheckAbilities::class);
 
         $router->aliasMiddleware('ability', \Laravel\Sanctum\Http\Middleware\CheckForAnyAbility::class);
 
